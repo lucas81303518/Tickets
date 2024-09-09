@@ -1,0 +1,94 @@
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\appsettings.Development.json
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\appsettings.json
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Tickets.exe
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Tickets.deps.json
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Tickets.runtimeconfig.json
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Tickets.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Tickets.pdb
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.csproj.AssemblyReference.cache
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.GeneratedMSBuildEditorConfig.editorconfig
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.AssemblyInfoInputs.cache
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.AssemblyInfo.cs
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.csproj.CoreCompileInputs.cache
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.MvcApplicationPartsAssemblyInfo.cs
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.MvcApplicationPartsAssemblyInfo.cache
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets.build.json
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets.development.json
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.Tickets.Microsoft.AspNetCore.StaticWebAssets.props
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.build.Tickets.props
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Tickets.props
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Tickets.props
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\staticwebassets.pack.json
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\scopedcss\bundle\Tickets.styles.css
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.csproj.Up2Date
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.dll
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\refint\Tickets.dll
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.pdb
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.genruntimeconfig.cache
+F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\ref\Tickets.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\AutoMapper.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Castle.Core.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Humanizer.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Npgsql.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\appsettings.Development.json
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\appsettings.json
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Tickets.exe
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Tickets.deps.json
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Tickets.runtimeconfig.json
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Tickets.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Tickets.pdb
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\AutoMapper.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Castle.Core.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Humanizer.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Npgsql.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\Tickets - Principal\Tickets\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.csproj.AssemblyReference.cache
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.GeneratedMSBuildEditorConfig.editorconfig
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.AssemblyInfoInputs.cache
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.AssemblyInfo.cs
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.csproj.CoreCompileInputs.cache
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.MvcApplicationPartsAssemblyInfo.cs
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.MvcApplicationPartsAssemblyInfo.cache
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets.build.json
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets.development.json
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.Tickets.Microsoft.AspNetCore.StaticWebAssets.props
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.build.Tickets.props
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Tickets.props
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Tickets.props
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\staticwebassets.pack.json
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\scopedcss\bundle\Tickets.styles.css
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.csproj.Up2Date
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.dll
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\refint\Tickets.dll
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.pdb
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.genruntimeconfig.cache
+F:\Tickets - Principal\Tickets\obj\Debug\net6.0\ref\Tickets.dll
