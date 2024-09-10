@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using Tickets.Data.DTO;
 using Tickets.Services;
 
@@ -50,7 +51,7 @@ namespace Tickets.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UpdateFuncionarioDto>>> RecuperarFuncionarios()
+        public async Task<ActionResult<IEnumerable<UpdateFuncionarioDto>>> RecuperarFuncionarios()            
         {
             var funcionarios = await _funcionarioService.RecuperarFuncionarios();            
             return Ok(funcionarios);

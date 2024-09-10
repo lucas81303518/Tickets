@@ -15,6 +15,7 @@ builder.Services.AddDbContext<TicketsContext>
                .UseNpgsql(connectionString);//.UseInMemoryDatabase(databaseName: "TestDatabase");
     });
 builder.Services.AddScoped<FuncionarioService>();
+builder.Services.AddScoped<TicketService>();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -92,3 +92,4 @@ F:\Tickets - Principal\Tickets\obj\Debug\net6.0\refint\Tickets.dll
 F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.pdb
 F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.genruntimeconfig.cache
 F:\Tickets - Principal\Tickets\obj\Debug\net6.0\ref\Tickets.dll
+F:\Tickets-backend\Tickets\obj\Debug\net6.0\Tickets.sourcelink.json
