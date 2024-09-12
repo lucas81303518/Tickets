@@ -31,7 +31,6 @@ F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.pdb
 F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\Tickets.genruntimeconfig.cache
 F:\Tickets-BackEnd\Tickets\obj\Debug\net6.0\ref\Tickets.dll
 F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\AutoMapper.dll
-F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Castle.Core.dll
 F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Humanizer.dll
 F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
@@ -93,3 +92,4 @@ F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.pdb
 F:\Tickets - Principal\Tickets\obj\Debug\net6.0\Tickets.genruntimeconfig.cache
 F:\Tickets - Principal\Tickets\obj\Debug\net6.0\ref\Tickets.dll
 F:\Tickets-backend\Tickets\obj\Debug\net6.0\Tickets.sourcelink.json
+F:\Tickets-BackEnd\Tickets\bin\Debug\net6.0\Moq.dll

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Tickets-backend\\Tickets\\Tickets.csproj": {}
+    "F:\\Tickets-BackEnd\\Tickets\\Tickets.csproj": {}
   },
   "projects": {
-    "F:\\Tickets-backend\\Tickets\\Tickets.csproj": {
+    "F:\\Tickets-BackEnd\\Tickets\\Tickets.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Tickets-backend\\Tickets\\Tickets.csproj",
+        "projectUniqueName": "F:\\Tickets-BackEnd\\Tickets\\Tickets.csproj",
         "projectName": "Tickets",
-        "projectPath": "F:\\Tickets-backend\\Tickets\\Tickets.csproj",
+        "projectPath": "F:\\Tickets-BackEnd\\Tickets\\Tickets.csproj",
         "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-        "outputPath": "F:\\Tickets-backend\\Tickets\\obj\\",
+        "outputPath": "F:\\Tickets-BackEnd\\Tickets\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -52,11 +52,7 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[11.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
+              "version": "[13.0.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -75,6 +71,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.22, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",

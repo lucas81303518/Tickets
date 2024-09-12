@@ -4,6 +4,7 @@ using System.Reflection.Metadata;
 using Tickets.Data;
 using Tickets.Data.DTO;
 using Tickets.Models;
+using static Tickets.Models.ErrorMessages;
 
 namespace Tickets.Services
 {
@@ -17,8 +18,11 @@ namespace Tickets.Services
             _context = context;
             _mapper = mapper;
         }
-
-        public async Task AdicionarFuncionario(CreateFuncionarioDto createFuncionarioDto)
+        private bool IsUniqueCpfViolation(Exception ex)
+        {
+            return ex.InnerException != null && ex.InnerException.Message.Contains("IX_Funcionario_Cpf");
+        }
+        public async Task<ResponseClient<object>> AdicionarFuncionario(CreateFuncionarioDto createFuncionarioDto)
         {
             var funcionarioModel = _mapper.Map<Funcionario>(createFuncionarioDto);
             funcionarioModel.Situacao = 'A';
@@ -27,60 +31,71 @@ namespace Tickets.Services
             {
                 await _context.Funcionarios.AddAsync(funcionarioModel);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                if (ex.InnerException != null && ex.InnerException.Message.Contains("IX_Funcionario_Cpf"))
-                {
-                    throw new ArgumentException("CPF já existe no sistema.");
-                }
-
-                throw;
+                return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Erro ao salvar as alterações {ex.Message}");
-            }
+                if(ex is DbUpdateException)
+                {
+                    if (IsUniqueCpfViolation(ex))                   
+                        return new ResponseClient<object>(false, ErrorCode.CpfJaExiste);                    
+                }
+                return new ResponseClient<object>(false, ErrorCode.ErroAoSalvar, ex.Message);
+            }            
         }
 
-        public async Task EditarFuncionario(int id, UpdateFuncionarioDto updateFuncionarioDto)
+        public async Task<ResponseClient<object>> EditarFuncionario(int id, UpdateFuncionarioDto updateFuncionarioDto)
         {
             var funcionario = await _context.Funcionarios.FindAsync(id);
             if (funcionario == null)
-                throw new KeyNotFoundException($"Funcionário id: {id} não existe!");
+                return new ResponseClient<object>(false, ErrorCode.FuncionarioNaoEncontrado);
 
             try
             {
                 _mapper.Map(updateFuncionarioDto, funcionario);
                 funcionario.DataAlteracao = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                if (ex.InnerException != null && ex.InnerException.Message.Contains("IX_Funcionario_Cpf"))
-                {
-                    throw new ArgumentException("CPF já existe no sistema.");
-                }
-
-                throw;
+                return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Erro ao salvar as alterações {ex.Message}");
+                if (ex is DbUpdateException)
+                {
+                    if (IsUniqueCpfViolation(ex))
+                        return new ResponseClient<object>(false, ErrorCode.CpfJaExiste);
+                }
+                return new ResponseClient<object>(false, ErrorCode.ErroAoSalvar, ex.Message);
             }
         }
 
-        public async Task<IEnumerable<Funcionario>> RecuperarFuncionarios()
+        public async Task<ResponseClient<IEnumerable<Funcionario>>> RecuperarFuncionarios()
         {
-            return await _context.Funcionarios.ToListAsync();            
+            try
+            {
+                var funcionarios = await _context.Funcionarios.ToListAsync();
+                return new ResponseClient<IEnumerable<Funcionario>>(true, funcionarios);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseClient<IEnumerable<Funcionario>>(false, ErrorCode.ErroAoConsultar, ex.Message);
+            }
         }
 
-        public async Task<Funcionario> RecuperarFuncionario(int id)
+        public async Task<ResponseClient<Funcionario>> RecuperarFuncionario(int id)
         {
-            var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(f => f.Id == id);
-            if (funcionario == null)
-                throw new KeyNotFoundException($"Funcionário id: {id} não existe!");
-            return funcionario;
+            try
+            {
+                var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(f => f.Id == id);
+                if (funcionario == null)
+                    return new ResponseClient<Funcionario>(false, ErrorCode.FuncionarioNaoEncontrado);
+
+                return new ResponseClient<Funcionario>(true, funcionario);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseClient<Funcionario>(false, ErrorCode.ErroAoConsultar, ex.Message);
+            }
         }
+
     }
 }

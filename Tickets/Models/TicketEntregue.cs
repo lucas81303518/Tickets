@@ -13,7 +13,7 @@ namespace Tickets.Models
         [RegularExpression(@"[AI]", ErrorMessage = "O campo Situação deve ser 'A' para Ativo ou 'I' para Inativo.")]
         public char Situacao { get; set; }      
         public DateTime DataEntrega { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Funcionário é obrigatório!")]
         public int FuncionarioId { get; set; }
         public virtual Funcionario Funcionario { get; set; }
     }

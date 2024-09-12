@@ -1,22 +1,27 @@
 ﻿using System.Text.RegularExpressions;
+using Tickets.Data.DTO;
+using static Tickets.Models.ErrorMessages;
 
 namespace Tickets.Models.ValidationsAttribute
 {
     public static class CpfValidator
     {
-        public static bool IsValid(string cpf)
+        public static ResponseClient<object> Validate(string cpf)
         {
             if (string.IsNullOrEmpty(cpf))
-                throw new ArgumentNullException(nameof(cpf), "O CPF não pode ser nulo ou vazio.");
-
-            if (cpf.Length != 11)
-                throw new ArgumentException("O CPF deve ter exatamente 11 dígitos.");
+            {
+                return new ResponseClient<object>(false, ErrorCode.CpfNuloOuVazio);
+            }            
 
             if (!cpf.All(char.IsDigit))
-                throw new ArgumentException("O CPF deve conter apenas números e não pode ter caracteres especiais.");     
+            {
+                return new ResponseClient<object>(false, ErrorCode.CpfContemCaracteresInvalidos);
+            }
 
             if (new string(cpf[0], 11) == cpf)
-                throw new ArgumentException("O CPF não pode conter todos os dígitos iguais.", nameof(cpf));
+            {
+                return new ResponseClient<object>(false, ErrorCode.CpfDigitosIguais);
+            }
 
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -26,7 +31,7 @@ namespace Tickets.Models.ValidationsAttribute
 
             for (int i = 0; i < 9; i++)
             {
-                int.TryParse(tempCpf[i].ToString(), out int digit);                  
+                int.TryParse(tempCpf[i].ToString(), out int digit);
                 soma += digit * multiplicador1[i];
             }
 
@@ -42,7 +47,7 @@ namespace Tickets.Models.ValidationsAttribute
             soma = 0;
             for (int i = 0; i < 10; i++)
             {
-                int.TryParse(tempCpf[i].ToString(), out int digit);               
+                int.TryParse(tempCpf[i].ToString(), out int digit);
                 soma += digit * multiplicador2[i];
             }
 
@@ -55,11 +60,12 @@ namespace Tickets.Models.ValidationsAttribute
             digito += resto.ToString();
 
             if (!cpf.EndsWith(digito))
-                throw new ArgumentException("O CPF informado é inválido.", nameof(cpf));
+            {
+                return new ResponseClient<object>(false, ErrorCode.CpfInvalido);
+            }
 
-            return true;
+            return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
         }
 
     }
-
 }

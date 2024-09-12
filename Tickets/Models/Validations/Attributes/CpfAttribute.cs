@@ -6,13 +6,15 @@ namespace Tickets.Models
     public class CpfAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            var cpf = value as string;
+        {           
+            var validationResult = CpfValidator.Validate(value as string);
 
-            if (CpfValidator.IsValid(cpf))
+            if (validationResult.Success)
+            {
                 return ValidationResult.Success;
-
-            return new ValidationResult("O CPF informado é inválido.");
+            }
+            
+            return new ValidationResult(validationResult.ErrorMessage);
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Tickets.Data;
 using Tickets.Data.DTO;
 using Tickets.Models;
+using static Tickets.Models.ErrorMessages;
 
 namespace Tickets.Services
 {
@@ -18,28 +19,78 @@ namespace Tickets.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> AdicionarTicket(CreateTicket createTicket)
+        private bool IsErrorFK_Funcionario(Exception ex)
         {
-            var ticketModel = _mapper.Map<TicketEntregue>(createTicket);
-            await _context.AddAsync(ticketModel);
-            await _context.SaveChangesAsync();
-            return true;
+            return ex.InnerException != null && ex.InnerException.Message.Contains("FK_TicketsEntregue_Funcionarios_FuncionarioId");
         }
 
-        public async Task<bool> EditarTicket(int id, UpdateTicket updateTicket)
+        public async Task<ResponseClient<object>> AdicionarTicket(CreateTicket createTicket)
+        {
+            try
+            {                
+                var ticketModel = _mapper.Map<TicketEntregue>(createTicket);
+                ticketModel.Situacao = 'A';
+                await _context.AddAsync(ticketModel);
+                await _context.SaveChangesAsync();
+                return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
+            }
+            catch (Exception ex)
+            {
+                if (IsErrorFK_Funcionario(ex))
+                {
+                    return new ResponseClient<object>(false, ErrorCode.FuncionarioNaoEncontrado);
+                }
+                return new ResponseClient<object>(false, ErrorCode.ErroAoSalvar, ex.Message);
+            }            
+        }
+
+        public async Task<ResponseClient<object>> EditarTicket(int id, UpdateTicket updateTicket)
         {
             var ticket = await _context.TicketsEntregue.FirstOrDefaultAsync(t=> t.Id == id);
             if (ticket == null)
-                throw new KeyNotFoundException($"Ticket id: {id} não existe!");
+                return new ResponseClient<object>(false, ErrorCode.TicketNaoEncontrado);
             try
             {
                 _mapper.Map(updateTicket, ticket);
                 await _context.SaveChangesAsync();
-                return true;
+                return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
+            }       
+            catch (Exception ex)
+            {
+                if (IsErrorFK_Funcionario(ex))
+                {
+                    return new ResponseClient<object>(false, ErrorCode.FuncionarioNaoEncontrado);
+                }
+                return new ResponseClient<object>(false, ErrorCode.ErroAoSalvar, ex.Message);
+            }     
+        }
+
+        public async Task<ResponseClient<IEnumerable<TicketEntregue>>> RecuperarTickets()
+        {
+            try
+            {
+                var tickets = await _context.TicketsEntregue.ToListAsync();
+                return new ResponseClient<IEnumerable<TicketEntregue>>(true, tickets);
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Erro ao salvar as alterações {ex.Message}");
+                return new ResponseClient<IEnumerable<TicketEntregue>>(false, ErrorCode.ErroAoConsultar, ex.Message);
+            }
+        }
+
+        public async Task<ResponseClient<TicketEntregue>> RecuperarTicket(int id)
+        {
+            try
+            {
+                var ticket = await _context.TicketsEntregue.FirstOrDefaultAsync(t => t.Id == id);
+                if (ticket == null)
+                    return new ResponseClient<TicketEntregue>(false, ErrorCode.TicketNaoEncontrado);
+
+                return new ResponseClient<TicketEntregue>(true, ticket);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseClient<TicketEntregue>(false, ErrorCode.ErroAoConsultar, ex.Message);
             }
         }
 
