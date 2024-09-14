@@ -2,7 +2,7 @@
 # API Rest - BackEnd
 
 *Utilizo como arquitetura de software o MVC, pela facilidade de manutenção e escalabilidade.*
-
+*Projeto posui documentação com Swagger, ao rodar o projeto .NET ele abre um navegador contendo todos Endpoints*
 ## Diretórios do Projeto
 
 - **Pasta Models**
