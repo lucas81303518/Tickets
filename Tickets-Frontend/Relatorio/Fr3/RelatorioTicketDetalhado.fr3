@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="2022.2.10" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45548,7578505671" ReportOptions.Description.Text="" ReportOptions.LastChange="45548,9282547106" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets"/>
+  </Datasets>
+  <Variables>
+    <item Name=" New Category1"/>
+    <item Name="Periodo"/>
+    <item Name="FiltrosAplicados"/>
+  </Variables>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" HGuides.Text="" VGuides.Text="" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0" PrintOnPreviousPage="True">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="90,70872" Left="0" Top="18,89765" Width="718,1107">
+      <TfrxMemoView Name="Memo1" AllowVectorExport="True" Left="0" Top="0" Width="714,33117" Height="26,45671" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="Relatório de Tickets entregues"/>
+      <TfrxMemoView Name="Periodo" IndexTag="1" AllowVectorExport="True" Left="0" Top="25,01577" Width="714,33117" Height="26,45671" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="[Periodo]"/>
+      <TfrxMemoView Name="FiltrosAplicados" IndexTag="1" AllowVectorExport="True" Left="3,77953" Top="54,47248" Width="710,55164" Height="26,45671" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="[FiltrosAplicados]"/>
+      <TfrxLineView Name="Line2" AllowVectorExport="True" Left="0" Top="83,5906" Width="718,1107" Height="0" Color="0" Frame.Typ="4"/>
+    </TfrxReportTitle>
+    <TfrxGroupHeader Name="GroupHeader1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="86,92919" Left="0" Top="170,07885" Width="718,1107" Condition="frxDBDatasetTickets.&#34;funcionarioId&#34;">
+      <TfrxMemoView Name="Memo2" AllowVectorExport="True" Left="3,77952755905512" Top="2,88188" Width="64,25201" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Id"/>
+      <TfrxMemoView Name="Memo3" AllowVectorExport="True" Left="98,2677165354331" Top="2,88188" Width="151,1812" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Nome funcionário"/>
+      <TfrxMemoView Name="Memo4" AllowVectorExport="True" Left="325,03937007874" Top="2,88188" Width="151,1812" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="CPF"/>
+      <TfrxMemoView Name="Memo9" AllowVectorExport="True" Left="514,23655" Top="2,88188" Width="200,31509" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="Total tickets funcionário"/>
+      <TfrxMemoView Name="frxDBDatasetTicketstotalTicketsPorFuncionario" IndexTag="1" AllowVectorExport="True" Left="634,96104" Top="25,89765" Width="79,37013" Height="18,89765" DataField="totalTicketsPorFuncionario" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="[frxDBDatasetTickets.&#34;totalTicketsPorFuncionario&#34;]"/>
+      <TfrxMemoView Name="frxDBDatasetTicketsCpf" IndexTag="1" AllowVectorExport="True" Left="325,03958" Top="25,89765" Width="181,41744" Height="18,89765" DataField="Cpf" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[frxDBDatasetTickets.&#34;Cpf&#34;]"/>
+      <TfrxMemoView Name="frxDBDatasetTicketsnome" IndexTag="1" AllowVectorExport="True" Left="98,26778" Top="25,89765" Width="222,99227" Height="18,89765" DataField="nome" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[frxDBDatasetTickets.&#34;nome&#34;]"/>
+      <TfrxMemoView Name="frxDBDatasetTicketsfuncionarioId" IndexTag="1" AllowVectorExport="True" Left="3,77953" Top="25,89765" Width="83,14966" Height="18,89765" DataField="funcionarioId" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="[frxDBDatasetTickets.&#34;funcionarioId&#34;]"/>
+      <TfrxMemoView Name="Memo5" AllowVectorExport="True" Left="3,77953" Top="59,91342" Width="86,92919" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Id Ticket"/>
+      <TfrxMemoView Name="Memo6" AllowVectorExport="True" Left="98,2677165354331" Top="59,91342" Width="113,3859" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Quantidade"/>
+      <TfrxMemoView Name="Memo7" AllowVectorExport="True" Left="215,43321" Top="59,91342" Width="151,1812" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Situação"/>
+      <TfrxMemoView Name="Memo8" AllowVectorExport="True" Left="370,39394" Top="59,91342" Width="151,1812" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Data/Hora de entrega"/>
+    </TfrxGroupHeader>
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="279,68522" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" RowCount="0">
+      <TfrxMemoView Name="frxDBDatasetTicketsid1" IndexTag="1" AllowVectorExport="True" Left="3,77952755905512" Top="0" Width="79,37013" Height="18,89765" DataField="id" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Frame.Typ="0" Text="[frxDBDatasetTickets.&#34;id&#34;]"/>
+      <TfrxMemoView Name="frxDBDatasetTicketsquantidade" IndexTag="1" AllowVectorExport="True" Left="98,2677165354331" Top="0" Width="79,37013" Height="18,89765" DataField="quantidade" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Frame.Typ="0" Text="[frxDBDatasetTickets.&#34;quantidade&#34;]"/>
+      <TfrxMemoView Name="frxDBDatasetTicketssituacao" IndexTag="1" AllowVectorExport="True" Left="370,39394" Top="0" Width="226,7718" Height="18,89765" DataField="dataEntrega" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Frame.Typ="0" Text="[frxDBDatasetTickets.&#34;dataEntrega&#34;]"/>
+      <TfrxMemoView Name="frxDBDatasetTicketssituacao1" IndexTag="1" AllowVectorExport="True" Left="215,433070866142" Top="0" Width="158,74026" Height="18,89765" DataSet="frxDBDatasetTickets" DataSetName="frxDBDatasetTickets" Frame.Typ="0" Text="[frxDBDatasetTickets.&#34;situacao&#34;]"/>
+    </TfrxMasterData>
+    <TfrxReportSummary Name="ReportSummary1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="60,69295" Left="0" Top="362,83488" Width="718,1107">
+      <TfrxMemoView Name="Memo10" AllowVectorExport="True" Left="510,23655" Top="7,77953" Width="200,31509" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="Total tickets geral"/>
+      <TfrxMemoView Name="Memo11" AllowVectorExport="True" Left="510,23655" Top="34,23624" Width="204,09462" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="[SUM(&#60;frxDBDatasetTickets.&#34;quantidade&#34;&#62;,MasterData1)]"/>
+      <TfrxLineView Name="Line1" AllowVectorExport="True" Left="0" Top="0" Width="718,1107" Height="0" Color="0" Frame.Typ="4"/>
+    </TfrxReportSummary>
+  </TfrxReportPage>
+</TfrxReport>

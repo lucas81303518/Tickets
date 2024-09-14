@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/08/24 13:05:43.000.878,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/24 13:10:33.000.350,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/05 22:32:10.000.800,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/13 09:39:01.000.947,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/13 10:31:37.000.693,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/13 10:43:22.000.163,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/13 11:37:54.827,=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/13 11:38:49.902,F:\Tickets-frontend\Relatorio\FrmRelatorio.dfm=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/09/13 11:38:49.902,F:\Tickets-frontend\Relatorio\FrmRelatorio.pas=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/13 11:39:07.001,F:\Tickets-frontend\Relatorio\Relatorio.dproj=C:\Users\Lucas\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/09/13 11:41:22.098,=F:\Tickets-frontend\Controllers\uFuncionarioController.pas</Transaction>
+    <Transaction>2024/09/13 11:41:22.132,=F:\Tickets-frontend\Controllers\uTicketController.pas</Transaction>
+    <Transaction>2024/09/13 11:43:22.817,=F:\Tickets-frontend\DAO\uFuncionarioDAO.pas</Transaction>
+    <Transaction>2024/09/13 11:43:22.834,=F:\Tickets-frontend\DAO\uTicketDAO.pas</Transaction>
+    <Transaction>2024/09/13 11:43:36.783,=F:\Tickets-frontend\Models\FuncionarioModel.pas</Transaction>
+    <Transaction>2024/09/13 11:43:36.836,=F:\Tickets-frontend\Models\TicketModel.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.742,=F:\Tickets-frontend\Data\Dto\CreateFuncionarioDto.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.772,=F:\Tickets-frontend\Data\Dto\CreateTicket.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.810,=F:\Tickets-frontend\Data\Dto\ReadTicket.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.832,=F:\Tickets-frontend\Data\Dto\ReadTicketDetalhado.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.870,=F:\Tickets-frontend\Data\Dto\TicketsResumo.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.891,=F:\Tickets-frontend\Data\Dto\UpdateFuncionarioDto.pas</Transaction>
+    <Transaction>2024/09/13 11:44:09.927,=F:\Tickets-frontend\Data\Dto\UpdateTicket.pas</Transaction>
+    <Transaction>2024/09/13 11:44:29.236,=F:\Tickets-frontend\Data\uDataModulo.pas</Transaction>
+    <Transaction>2024/09/13 11:45:10.977,=F:\Tickets-frontend\Utils\ThreadingEx.pas</Transaction>
+    <Transaction>2024/09/13 11:51:57.474,=F:\Tickets-frontend\Utils\Funcoes.pas</Transaction>
+    <Transaction>2024/09/13 17:50:18.992,=F:\Tickets-frontend\Utils\Vcl\uniGUI.Loading.pas</Transaction>
+    <Transaction>2024/09/13 17:51:06.904,F:\Tickets-frontend\Utils\Vcl\uniGUI.Loading.pas=</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android64="127.0.0.1:5555" Android="127.0.0.1:5555"/>
+	</ActiveMobileDevice>
+</BorlandProject>

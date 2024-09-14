@@ -1,0 +1,107 @@
+unit uTicketController;
+
+interface
+
+uses
+  TicketsResumo, TicketModel, UpdateTicket, CreateTicket,
+  Generics.Collections, uTicketDAO;
+
+type
+  TExecutarAposConsulta = procedure(Sender: TObject) of object;
+
+  TTicketController = class
+    private
+      FTicket: TTicketModel;
+      FListaTicketsDetalhado: TTicketsResumo;
+      TicketDAO: TTicketDAO;
+    public
+{      function AdicionarTicket(createTicket: TCreateTicket): Boolean;
+      function EditarTicket(idTicket: Integer; updateTicket: TUpdateTicket): Boolean;}
+
+      procedure RecuperarTickets(OnExecutarAposRecuperarTicketsDetalhado: TExecutarAposConsulta);
+      function listaTickets: TObjectList<TTicketModel>;
+
+      procedure RecuperarTicket(idTicket: Integer; OnExecutarAposRecuperarTicketsDetalhado: TExecutarAposConsulta);
+      function  ticket: TTicketModel;
+
+      procedure RecuperarTicketsDetalhado(dataInicial, dataFinal: TDateTime; situacao: char = ' '; idFuncionario: Integer = 0;
+                                         OnExecutarAposRecuperarTicketsDetalhado: TExecutarAposConsulta = nil);
+      function  listaTicketsDetalhado: TTicketsResumo;
+
+      constructor Create();
+      destructor Destroy;
+end;
+
+implementation
+
+uses
+  System.Classes;
+
+{ TTicketController }
+
+constructor TTicketController.Create();
+begin
+  inherited Create;
+  TicketDAO := TTicketDAO.Create;
+end;
+
+destructor TTicketController.Destroy;
+begin
+  TicketDAO.Free;
+  inherited Destroy;
+end;
+
+function TTicketController.listaTickets: TObjectList<TTicketModel>;
+begin
+
+end;
+
+function TTicketController.listaTicketsDetalhado: TTicketsResumo;
+begin
+
+end;
+
+procedure TTicketController.RecuperarTicket(idTicket: Integer;
+  OnExecutarAposRecuperarTicketsDetalhado: TExecutarAposConsulta);
+var
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      FTicket := TicketDAO.RecuperarTicket(idTicket);
+    end);
+
+  Thread.OnTerminate := OnExecutarAposRecuperarTicketsDetalhado;
+  Thread.Start;
+end;
+
+procedure TTicketController.RecuperarTickets(
+  OnExecutarAposRecuperarTicketsDetalhado: TExecutarAposConsulta);
+begin
+
+end;
+
+procedure TTicketController.RecuperarTicketsDetalhado(dataInicial,
+  dataFinal: TDateTime; situacao: char; idFuncionario: Integer;
+  OnExecutarAposRecuperarTicketsDetalhado: TExecutarAposConsulta);
+var
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      listaTickets := TicketDAO.RecuperarTickets();
+    end);
+
+  Thread.OnTerminate := OnExecutarAposRecuperarTicketsDetalhado;
+  Thread.Start;
+
+end;
+
+function TTicketController.ticket: TTicketModel;
+begin
+  result := FTicket;
+end;
+
+end.

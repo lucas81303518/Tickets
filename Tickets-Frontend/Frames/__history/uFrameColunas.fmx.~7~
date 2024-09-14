@@ -1,0 +1,15 @@
+object FrameColunas: TFrameColunas
+  Align = Client
+  Size.Width = 320.000000000000000000
+  Size.Height = 44.000000000000000000
+  Size.PlatformDefault = False
+  OnResized = FrameResized
+  object rectGeral: TRectangle
+    Align = Client
+    Margins.Bottom = 1.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 320.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+  end
+end

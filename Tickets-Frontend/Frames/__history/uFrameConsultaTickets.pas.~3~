@@ -1,0 +1,45 @@
+unit uFrameConsultaTickets;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Objects, FMX.Controls.Presentation;
+
+type
+  TFrameConsultaTickets = class(TFrame)
+    RectGeral: TRectangle;
+    RectId: TRectangle;
+    lblId: TLabel;
+    rectEditar: TRectangle;
+    ImageEditar: TImage;
+    rectSituacao: TRectangle;
+    lblSituacao: TLabel;
+    RectNome: TRectangle;
+    lblQuantidade: TLabel;
+    rectFuncionario: TRectangle;
+    lblFuncionario: TLabel;
+  private
+    { Private declarations }
+    FIdTicket: Integer;
+    procedure CalculaTamanhoRectangles;
+  public
+    { Public declarations }
+    property IdTicket: Integer read FIdTicket write FIdTicket;
+  end;
+
+implementation
+
+{$R *.fmx}
+
+{ TFrameConsultaTickets }
+
+procedure TFrameConsultaTickets.CalculaTamanhoRectangles;
+begin
+  RectId.Width   := Trunc(Self.Width * 0.1);
+  RectNome.Width := Trunc(Self.Width * 0.2);
+  Rec
+end;
+
+end.

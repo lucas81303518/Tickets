@@ -1,0 +1,191 @@
+unit FrmRelatorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, uTicketController, uFuncionarioController, FuncionarioModel,
+  frxClass, frxDBSet, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TFrmRelatorios = class(TForm)
+    Panel1: TPanel;
+    datePeriodoFinal: TDateTimePicker;
+    Label1: TLabel;
+    datePeriodoInicial: TDateTimePicker;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Label4: TLabel;
+    cbFuncionario: TComboBox;
+    rgSituacaoTicket: TRadioGroup;
+    Panel4: TPanel;
+    btnImprimir: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    panelCarregando: TPanel;
+    frxReportTickets: TfrxReport;
+    frxDBDatasetTickets: TfrxDBDataset;
+    frxDBDatasetFuncionario: TfrxDBDataset;
+    FTicketDataSet: TFDMemTable;
+    FTicketDataSetid: TIntegerField;
+    FTicketDataSetfuncionarioId: TIntegerField;
+    FTicketDataSetquantidade: TIntegerField;
+    FTicketDataSetsituacao: TStringField;
+    FTicketDataSetdataEntrega: TDateTimeField;
+    FMemTableFuncionario: TFDMemTable;
+    IntegerField1: TIntegerField;
+    FMemTableFuncionarionome: TStringField;
+    FMemTableFuncionarioCpf: TStringField;
+    FMemTableFuncionariosituacao: TStringField;
+    FMemTableFuncionariodataAlteracao: TDateTimeField;
+    FMemTableFuncionariototalTicketsPorFuncionario: TIntegerField;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnImprimirClick(Sender: TObject);
+  private
+    { Private declarations }
+    TicketController: TTicketController;
+    FuncionarioController: TFuncionarioController;
+    procedure ShowPanelCarregando(texto: string = 'Carregando...');
+    procedure HidePanelCarregando;
+    procedure onExecutarAposConsultaFuncionarios(Sender: TObject);
+    procedure onExecutarAposConsultaTickets(Sender: TObject);
+    procedure MontaComboboxFuncionarios();
+    procedure CarregarRelatorio;
+    procedure ConsultaDadosTickets;
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmRelatorios: TFrmRelatorios;
+
+const ArraySituacaoTicket: array[0..2] of char = ('T', 'A', 'I');
+
+implementation
+
+uses
+  uDataModulo, funcoes;
+
+{$R *.dfm}
+
+procedure TFrmRelatorios.btnImprimirClick(Sender: TObject);
+begin
+  ConsultaDadosTickets;
+end;
+
+procedure TFrmRelatorios.CarregarRelatorio;
+begin
+  if TicketController.listaTicketsDetalhado.TicketDataSet.RecordCount <= 0 then
+  begin
+    ShowMessage('Sem registros de Tickets com os filtros aplicados.');
+    Exit;
+  end;
+
+
+  FTicketDataSet.AppendData(TicketController.listaTicketsDetalhado.TicketDataSet, true);
+  FMemTableFuncionario.AppendData(TicketController.listaTicketsDetalhado.EmployeeDataSet, true);
+  frxReportTickets.PrepareReport();
+  frxReportTickets.showreport;
+end;
+
+procedure TFrmRelatorios.ConsultaDadosTickets;
+var
+  situacao: char;
+  funcionario: TFuncionarioModel;
+  funcionarioId: Integer;
+begin
+  funcionarioId := 0;
+  funcionario := TFuncionarioModel(ObterObjetoSelecionado(cbFuncionario));
+  if funcionario <> nil then
+    funcionarioId := funcionario.Id;
+
+  situacao := ArraySituacaoTicket[rgSituacaoTicket.ItemIndex];
+
+  TicketController.RecuperarTicketsDetalhado(datePeriodoInicial.Date,
+                                             datePeriodoFinal.Date,
+                                             situacao,
+                                             funcionarioId,
+                                             onExecutarAposConsultaTickets);
+end;
+
+procedure TFrmRelatorios.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FuncionarioController.Free;
+  TicketController.Free;
+  Action := TCloseAction.caFree;
+  FrmRelatorios := nil;
+end;
+
+procedure TFrmRelatorios.FormCreate(Sender: TObject);
+begin
+  DataModulo.RestConfig.ValidaConexaoAPI();
+  TicketController := TTicketController.Create;
+  FuncionarioController := TFuncionarioController.Create;
+end;
+
+procedure TFrmRelatorios.FormShow(Sender: TObject);
+begin
+  datePeriodoInicial.Date := Date - 30;
+  datePeriodoFinal.Date   := Date;
+  MontaComboboxFuncionarios();
+end;
+
+procedure TFrmRelatorios.HidePanelCarregando;
+begin
+  Self.Enabled := True;
+  panelCarregando.Visible := False;
+end;
+
+procedure TFrmRelatorios.MontaComboboxFuncionarios();
+begin
+  ShowPanelCarregando('Carregando funcionários...');
+  FuncionarioController.RecuperarFuncionarios(onExecutarAposConsultaFuncionarios);
+end;
+
+procedure TFrmRelatorios.onExecutarAposConsultaFuncionarios(Sender: TObject);
+begin
+  HidePanelCarregando;
+  if Sender is TThread then
+  begin
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+      ShowMessage(Exception(TThread(sender).FatalException).Message);
+      Exit;
+    end;
+  end;
+
+  for var funcionario: TFuncionarioModel in FuncionarioController.listaFuncionarios do
+    cbFuncionario.Items.AddObject(funcionario.Nome, funcionario);
+end;
+
+procedure TFrmRelatorios.onExecutarAposConsultaTickets(Sender: TObject);
+begin
+  HidePanelCarregando;
+  if Sender is TThread then
+  begin
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+      ShowMessage(Exception(TThread(sender).FatalException).Message);
+      Exit;
+    end;
+  end;
+
+  CarregarRelatorio;
+end;
+
+procedure TFrmRelatorios.ShowPanelCarregando(texto: string = 'Carregando...');
+begin
+  panelCarregando.Caption := texto;
+  panelCarregando.Left := Trunc(Screen.Width - panelCarregando.Width) div 2;
+  panelCarregando.Top  := Trunc(Screen.Height - panelCarregando.Height) div 2;
+  panelCarregando.Visible := True;
+  Self.Enabled := False;
+  Application.ProcessMessages;
+end;
+
+end.

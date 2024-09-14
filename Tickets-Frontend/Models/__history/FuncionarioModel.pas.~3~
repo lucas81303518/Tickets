@@ -1,0 +1,40 @@
+unit FuncionarioModel;
+
+interface
+
+uses
+  Enumerados;
+
+type
+  TFuncionarioModel = class
+  private
+    FId: Integer;
+    FNome: string;
+    FCpf: string;
+    FSituacao: TSituacaoCadastral;
+    FDataAlteracao: TDateTime;
+
+    function GetId: Integer;
+    function GetNome: string;
+    function GetCpf: string;
+    function GetSituacao: TSituacaoCadastral;
+    function GetDataAlteracao: TDateTime;
+
+    // Setters
+    procedure SetId(const Value: Integer);
+    procedure SetNome(const Value: string);
+    procedure SetCpf(const Value: string);
+    procedure SetSituacao(const Value: TSituacaoCadastral);
+    procedure SetDataAlteracao(const Value: TDateTime);
+  public
+    // Propriedades
+    property Id: Integer read GetId write SetId;
+    property Nome: string read GetNome write SetNome;
+    property Cpf: string read GetCpf write SetCpf;
+    property Situacao: TSituacaoCadastral read GetSituacao write SetSituacao;
+    property DataAlteracao: TDateTime read GetDataAlteracao write SetDataAlteracao;
+  end;
+
+implementation
+
+end.

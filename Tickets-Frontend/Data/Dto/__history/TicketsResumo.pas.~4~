@@ -1,0 +1,134 @@
+unit TicketsResumo;
+
+interface
+
+uses
+  System.JSON, Data.DB, FireDAC.Comp.Client, System.SysUtils;
+
+type
+  TTicketsResumo = class
+  private
+    FEmployeeDataSet: TFDMemTable;
+    FTicketDataSet: TFDMemTable;
+    procedure CreateEmployeeDataset;
+    procedure CreateTicketDataset;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure LoadDataFromJSON(const AJSONString: string);
+    property EmployeeDataSet: TFDMemTable read FEmployeeDataSet;
+    property TicketDataSet: TFDMemTable read FTicketDataSet;
+  end;
+
+implementation
+
+uses
+  System.DateUtils;
+
+{ TTicketsResumo }
+
+constructor TTicketsResumo.Create;
+begin
+  FEmployeeDataSet := TFDMemTable.Create(nil);
+  FTicketDataSet := TFDMemTable.Create(nil);
+  CreateEmployeeDataset;
+  CreateTicketDataset;
+end;
+
+destructor TTicketsResumo.Destroy;
+begin
+  FEmployeeDataSet.Free;
+  FTicketDataSet.Free;
+  inherited;
+end;
+
+procedure TTicketsResumo.CreateEmployeeDataset;
+begin
+  FEmployeeDataSet.FieldDefs.Clear;
+  FEmployeeDataSet.FieldDefs.Add('id', ftInteger);
+  FEmployeeDataSet.FieldDefs.Add('nome', ftString, 255);
+  FEmployeeDataSet.FieldDefs.Add('cpf', ftString, 11);
+  FEmployeeDataSet.FieldDefs.Add('situacao', ftString, 1);
+  FEmployeeDataSet.FieldDefs.Add('dataAlteracao', ftDateTime);
+  FEmployeeDataSet.FieldDefs.Add('totalTicketsPorFuncionario', ftInteger);
+  FEmployeeDataSet.CreateDataSet;
+end;
+
+procedure TTicketsResumo.CreateTicketDataset;
+begin
+  FTicketDataSet.FieldDefs.Clear;
+  FTicketDataSet.FieldDefs.Add('id', ftInteger);
+  FTicketDataSet.FieldDefs.Add('funcionarioId', ftInteger);
+  FTicketDataSet.FieldDefs.Add('quantidade', ftInteger);
+  FTicketDataSet.FieldDefs.Add('situacao', ftString, 1);
+  FTicketDataSet.FieldDefs.Add('dataEntrega', ftDateTime);
+
+  FTicketDataSet.FieldDefs.Add('nome', ftString, 255);
+  FTicketDataSet.FieldDefs.Add('cpf', ftString, 11);
+  FTicketDataSet.FieldDefs.Add('situacaoFuncionario', ftString, 1);
+  FTicketDataSet.FieldDefs.Add('dataAlteracao', ftDateTime);
+  FTicketDataSet.FieldDefs.Add('totalTicketsPorFuncionario', ftInteger);
+
+  FTicketDataSet.CreateDataSet;
+end;
+
+procedure TTicketsResumo.LoadDataFromJSON(const AJSONString: string);
+var
+  JSONObject: TJSONObject;
+  DetailsArray, TicketsArray: TJSONArray;
+  EmployeeObject, TicketObject: TJSONObject;
+  i, j: Integer;
+begin
+  JSONObject := TJSONObject.ParseJSONValue(AJSONString) as TJSONObject;
+  if JSONObject = nil then
+    raise Exception.Create('Invalid JSON format');
+
+  try
+    FEmployeeDataSet.EmptyDataSet;
+    FTicketDataSet.EmptyDataSet;
+
+    DetailsArray := JSONObject.GetValue('detalhesPorFuncionario') as TJSONArray;
+
+    for i := 0 to DetailsArray.Count - 1 do
+    begin
+      EmployeeObject := DetailsArray.Items[i] as TJSONObject;
+
+      {FEmployeeDataSet.Append;
+      FEmployeeDataSet.FieldByName('id').AsInteger := EmployeeObject.GetValue('funcionario').GetValue<Integer>('id');
+      FEmployeeDataSet.FieldByName('nome').AsString := EmployeeObject.GetValue('funcionario').GetValue<string>('nome');
+      FEmployeeDataSet.FieldByName('cpf').AsString := EmployeeObject.GetValue('funcionario').GetValue<string>('cpf');
+      FEmployeeDataSet.FieldByName('situacao').AsString := EmployeeObject.GetValue('funcionario').GetValue<string>('situacao');
+      FEmployeeDataSet.FieldByName('dataAlteracao').AsDateTime := ISO8601ToDate(EmployeeObject.GetValue('funcionario').GetValue<string>('dataAlteracao'));
+      FEmployeeDataSet.FieldByName('totalTicketsPorFuncionario').AsInteger := EmployeeObject.GetValue<Integer>('totalTicketsPorFuncionario');
+      FEmployeeDataSet.Post;}
+
+      FTicketDataSet.Append;
+      FTicketDataSet.FieldByName('id').AsInteger := EmployeeObject.GetValue('funcionario').GetValue<Integer>('id');
+      FTicketDataSet.FieldByName('nome').AsString := EmployeeObject.GetValue('funcionario').GetValue<string>('nome');
+      FTicketDataSet.FieldByName('cpf').AsString := EmployeeObject.GetValue('funcionario').GetValue<string>('cpf');
+      FTicketDataSet.FieldByName('situacaoFuncionario').AsString := EmployeeObject.GetValue('funcionario').GetValue<string>('situacao');
+      FTicketDataSet.FieldByName('dataAlteracao').AsDateTime := ISO8601ToDate(EmployeeObject.GetValue('funcionario').GetValue<string>('dataAlteracao'));
+      FTicketDataSet.FieldByName('totalTicketsPorFuncionario').AsInteger := EmployeeObject.GetValue<Integer>('totalTicketsPorFuncionario');
+      FTicketDataSet.Post;
+
+
+      TicketsArray := EmployeeObject.GetValue('tickets') as TJSONArray;
+      for j := 0 to TicketsArray.Count - 1 do
+      begin
+        TicketObject := TicketsArray.Items[j] as TJSONObject;
+        FTicketDataSet.Append;
+        FTicketDataSet.FieldByName('id').AsInteger := TicketObject.GetValue<Integer>('id');
+        FTicketDataSet.FieldByName('funcionarioId').AsInteger := EmployeeObject.GetValue('funcionario').GetValue<Integer>('id');
+        FTicketDataSet.FieldByName('quantidade').AsInteger := TicketObject.GetValue<Integer>('quantidade');
+        FTicketDataSet.FieldByName('situacao').AsString := TicketObject.GetValue<string>('situacao');
+        FTicketDataSet.FieldByName('dataEntrega').AsDateTime := ISO8601ToDate(TicketObject.GetValue<string>('dataEntrega'));
+        FTicketDataSet.Post;
+      end;
+    end;
+  finally
+    JSONObject.Free;
+  end;
+end;
+
+end.
+

@@ -1,0 +1,83 @@
+unit uFuncionarioController;
+
+interface
+
+uses
+  uFuncionarioDAO, System.Generics.Collections, FuncionarioModel,
+  CreateFuncionarioDto;
+
+type
+  TExecutarAposConsulta = procedure(Sender: TObject) of object;
+
+  TFuncionarioController = class
+  private
+    FFuncionarioDAO: TFuncionarioDAO;
+    FListaFuncionarios: TObjectList<TFuncionarioModel>;
+  public
+    procedure AdicionarFuncionario(createFuncionarioDto: TCreateFuncionarioDto;
+              OnExecutarAposCriarRegistro: TExecutarAposConsulta);
+    procedure RecuperarFuncionarios(OnExecutarAposConsulta: TExecutarAposConsulta);
+    function  listaFuncionarios: TObjectList<TFuncionarioModel>;
+    constructor Create();
+    destructor  Destroy;
+end;
+implementation
+
+uses
+  uDataModulo, System.Classes, System.Threading, Loading,
+  FMX.Dialogs;
+
+{ TFuncionarioController }
+
+procedure TFuncionarioController.AdicionarFuncionario(
+  createFuncionarioDto: TCreateFuncionarioDto;
+  OnExecutarAposCriarRegistro: TExecutarAposConsulta);
+var
+  Retorno: Boolean;
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      retorno := FFuncionarioDAO.AdicionarFuncionario(createFuncionarioDto);
+    end);
+
+  Thread.OnTerminate := OnExecutarAposCriarRegistro;
+  Thread.Start;
+end;
+
+constructor TFuncionarioController.Create();
+begin
+  inherited Create;
+  FFuncionarioDAO := TFuncionarioDAO.Create;
+end;
+
+destructor TFuncionarioController.Destroy;
+begin
+  FFuncionarioDAO.Destroy;
+  if Assigned(FListaFuncionarios) then
+    FListaFuncionarios.Destroy;
+  inherited Destroy;
+end;
+
+function TFuncionarioController.listaFuncionarios: TObjectList<TFuncionarioModel>;
+begin
+  Result := FListaFuncionarios;
+end;
+
+procedure TFuncionarioController.RecuperarFuncionarios(
+  OnExecutarAposConsulta: TExecutarAposConsulta);
+var
+  Thread: TThread;
+begin
+  Thread := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      FListaFuncionarios := FFuncionarioDAO.RecuperarFuncionarios();
+    end);
+
+  Thread.OnTerminate := OnExecutarAposConsulta;
+  Thread.Start;
+end;
+
+end.

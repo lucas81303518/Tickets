@@ -1,0 +1,24 @@
+object DataModule1: TDataModule1
+  Height = 314
+  Width = 347
+  object RESTClient: TRESTClient
+    BaseURL = 'http:\\localhost:7257'
+    Params = <>
+    ConnectTimeout = 5000
+    SynchronizedEvents = False
+    Left = 152
+    Top = 56
+  end
+  object RESTRequest: TRESTRequest
+    Client = RESTClient
+    Params = <>
+    Response = RESTResponse
+    SynchronizedEvents = False
+    Left = 112
+    Top = 136
+  end
+  object RESTResponse: TRESTResponse
+    Left = 248
+    Top = 136
+  end
+end

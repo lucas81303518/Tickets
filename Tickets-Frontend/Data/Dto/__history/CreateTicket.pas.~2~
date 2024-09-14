@@ -1,0 +1,17 @@
+unit CreateTicket;
+
+interface
+
+type
+  TCreateTicket = class
+    private
+      FQuantidade: Integer;
+      FFuncionarioId: Integer;
+    public
+      property Quantidade: Integer read FQuantidade write FQuantidade;
+      property FuncionarioId: Integer read FFuncionarioId write FFuncionarioId;
+  end;
+
+implementation
+
+end.

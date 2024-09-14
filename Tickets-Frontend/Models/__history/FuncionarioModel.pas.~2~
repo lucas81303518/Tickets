@@ -1,0 +1,22 @@
+unit FuncionarioModel;
+
+interface
+
+uses
+  Enumerados;
+
+type
+  TFuncionarioModel = class
+    private
+      FId: Integer;
+      FNome: string;
+      FCpf: string;
+      Situacao: TSituacaoCadastral;
+
+    public
+
+  end;
+
+implementation
+
+end.

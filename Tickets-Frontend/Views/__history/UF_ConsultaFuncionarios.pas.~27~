@@ -1,0 +1,162 @@
+unit UF_ConsultaFuncionarios;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  UF_ConsultaBase, FMX.Layouts, FMX.ListBox, FMX.Controls.Presentation,
+  FMX.Objects, uFuncionarioController, FuncionarioModel, Generics.Collections;
+
+type
+  TFrmConsultaFuncionarios = class(TFrmConsultaBase)
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure ImageIncluirClick(Sender: TObject);
+  private
+    { Private declarations }
+    listaFuncionarios: TObjectList<TFuncionarioModel>;
+    FuncionarioController: TFuncionarioController;
+    procedure ConsultaDados;
+    procedure MontaTela(Sender: TObject);
+    procedure AdicionarColunaListBox;
+    procedure AdicionarItemListBox(aFuncionario: TFuncionarioModel);
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmConsultaFuncionarios: TFrmConsultaFuncionarios;
+
+implementation
+
+uses
+  Loading, uFrameConsultaFuncionario, Funcoes, uFrameColunas,
+  System.Generics.Collections, UF_CadastroFuncionario;
+
+{$R *.fmx}
+
+{ TFrmConsultaFuncionarios }
+
+procedure TFrmConsultaFuncionarios.AdicionarColunaListBox;
+var
+  Frame: TFrameColunas;
+  ItemLb: TListBoxItem;
+  listaColunas: TObjectList<TColumnsFrame>;
+begin
+  Itemlb := TListBoxItem.Create(lbRegistros);
+  Itemlb.Height := 35;
+
+  listaColunas := TObjectList<TColumnsFrame>.Create;
+  with listaColunas do
+  begin
+    var coluna: TColumnsFrame;
+    coluna := TColumnsFrame.Create;
+    coluna.Nome := 'Id';
+    coluna.tamanhoPorcent := 10;
+    Add(coluna);
+
+    coluna := TColumnsFrame.Create;
+    coluna.Nome := 'Nome';
+    coluna.tamanhoPorcent := 30;
+    Add(coluna);
+
+    coluna := TColumnsFrame.Create;
+    coluna.Nome := 'Cpf';
+    coluna.tamanhoPorcent := 20;
+    Add(coluna);
+
+    coluna := TColumnsFrame.Create;
+    coluna.Nome := 'Situação';
+    coluna.tamanhoPorcent := 20;
+    Add(coluna);
+
+    coluna := TColumnsFrame.Create;
+    coluna.Nome := 'Ações';
+    coluna.tamanhoPorcent := 20;
+    Add(coluna);
+  end;
+
+  Frame := TFrameColunas.Create(ItemLb, listaColunas);
+  ItemLb.AddObject(Frame);
+  lbRegistros.AddObject(ItemLb);
+end;
+
+procedure TFrmConsultaFuncionarios.AdicionarItemListBox(
+  aFuncionario: TFuncionarioModel);
+var
+  Frame: TFrameConsultaFuncionario;
+  ItemLb: TListBoxItem;
+begin
+  Itemlb := TListBoxItem.Create(lbRegistros);
+  Itemlb.Height := 35;
+
+  Frame := TFrameConsultaFuncionario.Create(ItemLb);
+  Frame.lblId.Text       := aFuncionario.Id.ToString;
+  Frame.lblNome.Text     := aFuncionario.Nome;
+  Frame.lblCpf.Text      := FormatarCPF(aFuncionario.Cpf);
+  Frame.lblSituacao.Text := IfThen(aFuncionario.Situacao = 'A', 'Ativo', 'Inativo');
+  ItemLb.AddObject(Frame);
+  lbRegistros.AddObject(ItemLb);
+end;
+
+procedure TFrmConsultaFuncionarios.ConsultaDados;
+begin
+  TLoading.Show('Consultando funcionários...', FrmConsultaFuncionarios);
+  FuncionarioController.RecuperarFuncionarios(MontaTela);
+end;
+
+procedure TFrmConsultaFuncionarios.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FuncionarioController.Free;
+  Action := TCloseAction.caFree;
+  FrmConsultaFuncionarios := nil;
+end;
+
+procedure TFrmConsultaFuncionarios.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FuncionarioController := TFuncionarioController.Create;
+end;
+
+procedure TFrmConsultaFuncionarios.FormShow(Sender: TObject);
+begin
+  inherited;
+  ConsultaDados;
+end;
+
+procedure TFrmConsultaFuncionarios.ImageIncluirClick(Sender: TObject);
+begin
+  inherited;
+  if not Assigned(FrmCadastroFuncionario) then
+    FrmCadastroFuncionario := TFrmCadastroFuncionario.Create(Self);
+  FrmCadastroFuncionario.Show;
+end;
+
+procedure TFrmConsultaFuncionarios.MontaTela(Sender: TObject);
+begin
+  TLoading.Hide;
+  if Sender is TThread then
+  begin
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+      ShowMessage(Exception(TThread(sender).FatalException).Message);
+      Exit;
+    end;
+  end;
+
+  lbRegistros.Items.Clear;
+  lbRegistros.beginUpdate;
+  try
+    AdicionarColunaListBox;
+    for var Funcionario: TFuncionarioModel in TObjectList<TFuncionarioModel>(Sender) do
+      AdicionarItemListBox(Funcionario);
+  finally
+    lbRegistros.EndUpdate;
+    TLoading.Hide;
+  end;
+end;
+
+end.

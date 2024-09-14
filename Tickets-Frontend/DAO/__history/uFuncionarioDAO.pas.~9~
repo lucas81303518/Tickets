@@ -1,0 +1,53 @@
+unit uFuncionarioDAO;
+
+interface
+
+uses
+  System.Generics.Collections, FuncionarioModel, REST.Json,
+  CreateFuncionarioDto;
+
+type
+  TFuncionarioDAO = class
+  private
+
+  public
+    function AdicionarFuncionario(createFuncionarioDto: TCreateFuncionarioDto): Boolean;
+    function RecuperarFuncionarios(): TObjectList<TFuncionarioModel>;
+end;
+
+implementation
+
+uses
+  uDataModulo, System.JSON;
+
+{ TFuncionarioDAO }
+
+function TFuncionarioDAO.AdicionarFuncionario(
+  createFuncionarioDto: TCreateFuncionarioDto): Boolean;
+var
+  JSONObject: TJSONObject;
+begin
+  JSONObject := TJSON.ObjectToJsonObject(createFuncionarioDto);
+  Result     := DataModulo.RestConfig.Post('Funcionario', JSONObject).StatusCode = 200;
+end;
+
+function TFuncionarioDAO.RecuperarFuncionarios: TObjectList<TFuncionarioModel>;
+var
+  JSONArray: TJSONArray;
+  JSONObject: TJSONObject;
+begin
+  Result := TObjectList<TFuncionarioModel>.create;
+
+  JSONObject := DataModulo.RestConfig.Get('Funcionario') as TJSONObject;
+  JSONArray  := JSONObject.GetValue('data') as TJSONArray;
+  if (JSONArray <> nil) and (JSONArray.Count > 0) then
+  begin
+    for var JSONValue: TJSONValue in JSONArray do
+    begin
+      var JSONItem := TJSONObject(JSONValue);
+      Result.Add(TJSON.JsonToObject<TFuncionarioModel>(JSONItem));
+    end;
+  end;
+end;
+
+end.

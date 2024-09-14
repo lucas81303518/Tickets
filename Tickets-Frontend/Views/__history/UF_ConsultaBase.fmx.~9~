@@ -1,0 +1,45 @@
+object FrmConsultaBase: TFrmConsultaBase
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 383
+  ClientWidth = 562
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object RectHeader: TRectangle
+    Align = Top
+    Size.Width = 562.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFF747474
+    object lblTitulo: TLabel
+      Align = Client
+      StyledSettings = [Family, FontColor]
+      Size.Width = 562.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Consulta base'
+      TabOrder = 0
+    end
+  end
+  object lbRegistros: TListBox
+    Align = Client
+    Size.Width = 562.000000000000000000
+    Size.Height = 339.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'transparentlistboxstyle'
+    TabOrder = 1
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 562.000000000000000000
+    Viewport.Height = 339.000000000000000000
+  end
+end

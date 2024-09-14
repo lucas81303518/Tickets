@@ -1,0 +1,20 @@
+unit TicketsResumo;
+
+interface
+
+uses
+  System.Generics.Collections, ReadTicketDetalhado;
+
+type
+  TTicketsResumo = class
+  private
+    FTotalGeralTickets: Integer;
+    FDetalhesPorFuncionario: TObjectList<TReadTicketDetalhado>;
+  public
+    property TotalGeralTickets: Integer read FTotalGeralTickets write FTotalGeralTickets;
+    property DetalhesPorFuncionario: TObjectList<TReadTicketDetalhado> read FDetalhesPorFuncionario write FDetalhesPorFuncionario;
+  end;
+
+implementation
+
+end.

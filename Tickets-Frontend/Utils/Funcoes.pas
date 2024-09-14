@@ -1,0 +1,190 @@
+unit Funcoes;
+
+interface
+
+uses
+  System.SysUtils, Winapi.ShellAPI, Winapi.Windows, System.IOUtils,
+  System.Classes, System.Generics.Collections, Winapi.TlHelp32,
+  {$ifdef FrameWork_FMX}
+  FMX.ListBox
+  {$ELSE}
+  Vcl.StdCtrls
+  {$ENDIF};
+
+  function ApenasNumeros(const AStr: string): string;
+  function FormatarCPF(const CPF: string): string;
+  function ValidarCPF(const CPF: string): Boolean;
+  function IfThen(ACondition: Boolean; ATrueResult, AFalseResult: string): string;
+  function ObterObjetoSelecionado(ComboBox: TComboBox): TObject;
+  procedure ExecutarExecutavel(const NomeArquivo: string);
+  procedure TerminarProcesso(const NomeProcesso: string);
+  function ProcessoEstaEmExecucao(const NomeProcesso: string): Boolean;
+
+const NOME_SERVICO_RELATORIO = 'Relatorio.exe';
+
+implementation
+
+uses
+  System.RegularExpressions;
+
+function ArquivoExecutavelExiste(const NomeArquivo: string): Boolean;
+var
+  CaminhoExe: string;
+begin
+  CaminhoExe := TPath.Combine(ExtractFilePath(ParamStr(0)), NomeArquivo);
+  Result := FileExists(CaminhoExe);
+end;
+function ProcessoEstaEmExecucao(const NomeProcesso: string): Boolean;
+const
+  MAX_PATH = 260;
+var
+  hSnap: THandle;
+  pe: TProcessEntry32;
+begin
+  Result := False;
+  hSnap := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  if hSnap = INVALID_HANDLE_VALUE then Exit;
+  pe.dwSize := SizeOf(TProcessEntry32);
+  if not Process32First(hSnap, pe) then
+  begin
+    CloseHandle(hSnap);
+    Exit;
+  end;
+  repeat
+    if SameText(pe.szExeFile, NomeProcesso) then
+    begin
+      Result := True;
+      Break;
+    end;
+  until not Process32Next(hSnap, pe);
+  CloseHandle(hSnap);
+end;
+procedure ExecutarExecutavel(const NomeArquivo: string);
+var
+  CaminhoExe: string;
+begin
+  CaminhoExe := TPath.Combine(ExtractFilePath(ParamStr(0)), NomeArquivo);
+  if ArquivoExecutavelExiste(NomeArquivo) then
+  begin
+    if not(ProcessoEstaEmExecucao(NomeArquivo)) then
+      ShellExecute(0, 'open', PChar(CaminhoExe), nil, nil, SW_SHOWNORMAL);
+    exit;
+  end;
+  raise Exception.Create('Arquivo "' + NomeArquivo + '" não foi encontrado.');
+end;
+
+procedure TerminarProcesso(const NomeProcesso: string);
+var
+  hSnap: THandle;
+  pe: TProcessEntry32;
+  hProcess: THandle;
+begin
+  hSnap := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  if hSnap = INVALID_HANDLE_VALUE then Exit;
+  pe.dwSize := SizeOf(TProcessEntry32);
+  if not Process32First(hSnap, pe) then
+  begin
+    CloseHandle(hSnap);
+    Exit;
+  end;
+  repeat
+    if SameText(pe.szExeFile, NomeProcesso) then
+    begin
+      hProcess := OpenProcess(PROCESS_TERMINATE, False, pe.th32ProcessID);
+      if hProcess <> 0 then
+      begin
+        TerminateProcess(hProcess, 0);
+        CloseHandle(hProcess);
+      end;
+      Break;
+    end;
+  until not Process32Next(hSnap, pe);
+  CloseHandle(hSnap);
+end;
+
+function ObterObjetoSelecionado(ComboBox: TComboBox): TObject;
+begin
+  if ComboBox.ItemIndex <> -1 then
+  begin
+    if ComboBox.Items.Objects[ComboBox.ItemIndex] is TObject then
+    begin
+      Result := ComboBox.Items.Objects[ComboBox.ItemIndex];
+      Exit;
+    end;
+  end;
+
+  Result := nil;
+end;
+
+function ApenasNumeros(const AStr: string): string;
+var
+  RegEx: TRegEx;
+begin
+  RegEx := TRegEx.Create('[^0-9]');
+  Result := RegEx.Replace(AStr, '');
+end;
+
+function ValidarCPF(const CPF: string): Boolean;
+const
+  Multiplicador1: array[0..8] of Integer = (10, 9, 8, 7, 6, 5, 4, 3, 2);
+  Multiplicador2: array[0..9] of Integer = (11, 10, 9, 8, 7, 6, 5, 4, 3, 2);
+var
+  i, Soma, Resto: Integer;
+  Digito, TempCPF: string;
+begin
+  Result := False;
+  if Trim(CPF) = '' then
+    Exit;
+  for i := 1 to Length(CPF) do
+  begin
+    if not (CPF[i] in ['0'..'9']) then
+      Exit;
+  end;
+  if (Length(CPF) = 11) and (Copy(CPF, 1, 11) = StringOfChar(CPF[1], 11)) then
+    Exit;
+  TempCPF := Copy(CPF, 1, 9);
+  Soma := 0;
+  for i := 1 to 9 do
+  begin
+    Soma := Soma + (Ord(TempCPF[i]) - Ord('0')) * Multiplicador1[i - 1];
+  end;
+  Resto := Soma mod 11;
+  if Resto < 2 then
+    Resto := 0
+  else
+    Resto := 11 - Resto;
+  Digito := IntToStr(Resto);
+  TempCPF := TempCPF + Digito;
+  Soma := 0;
+  for i := 1 to 10 do
+  begin
+    Soma := Soma + (Ord(TempCPF[i]) - Ord('0')) * Multiplicador2[i - 1];
+  end;
+  Resto := Soma mod 11;
+  if Resto < 2 then
+    Resto := 0
+  else
+    Resto := 11 - Resto;
+  Digito := Digito + IntToStr(Resto);
+  if Copy(CPF, 10, 2) = Digito then
+    Result := True;
+end;
+
+function IfThen(ACondition: Boolean; ATrueResult, AFalseResult: string): string;
+begin
+  if ACondition then
+    Result := ATrueResult
+  else
+    Result := AFalseResult;
+end;
+
+function FormatarCPF(const CPF: string): string;
+begin
+  if Length(CPF) = 11 then
+    Result := Format('%s.%s.%s-%s', [Copy(CPF, 1, 3), Copy(CPF, 4, 3), Copy(CPF, 7, 3), Copy(CPF, 10, 2)])
+  else
+    raise Exception.Create('O CPF deve conter 11 dígitos.');
+end;
+
+
+end.

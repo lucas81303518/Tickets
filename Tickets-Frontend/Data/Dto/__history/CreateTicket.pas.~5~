@@ -1,0 +1,20 @@
+unit CreateTicket;
+
+interface
+
+uses
+  System.Generics.Collections;
+
+type
+  TCreateTicket = class
+    private
+      FQuantidade: Integer;
+      FidFuncionarios: TArray<Integer>;
+    public
+      property Quantidade: Integer read FQuantidade write FQuantidade;
+      property idFuncionarios: TArray<Integer> read FidFuncionarios write FidFuncionarios;
+  end;
+
+implementation
+
+end.

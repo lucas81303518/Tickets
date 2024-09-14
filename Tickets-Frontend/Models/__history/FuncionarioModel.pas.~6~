@@ -1,0 +1,56 @@
+unit FuncionarioModel;
+
+interface
+
+uses
+  Enumerados;
+
+type
+  TFuncionarioModel = class
+  private
+    FId: Integer;
+    FNome: string;
+    FCpf: string;
+    FSituacao: TSituacaoCadastral;
+    FDataAlteracao: TDateTime;
+    procedure SetNome(const Value: string);
+    procedure SetCpf(const Value: string);
+    function ValidateNome(const Value: string): Boolean;
+    function ValidateCpf(const Value: string): Boolean;
+  public
+    property Id: Integer read FId write FId;
+    property Nome: string read FNome write SetNome;
+    property Cpf: string read FCpf write SetCpf;
+    property Situacao: TSituacaoCadastral read FSituacao write FSituacao;
+    property DataAlteracao: TDateTime read FDataAlteracao write FDataAlteracao;
+    function IsValid: Boolean;
+  end;
+implementation
+
+uses
+  System.SysUtils, System.RegularExpressions;
+procedure TFuncionarioModel.SetNome(const Value: string);
+begin
+  if not ValidateNome(Value) then
+    raise Exception.Create('Nome deve ter pelo menos 3 caracteres.');
+  FNome := Value;
+end;
+procedure TFuncionarioModel.SetCpf(const Value: string);
+begin
+  if not ValidateCpf(Value) then
+    raise Exception.Create('CPF deve ter 11 dígitos.');
+  FCpf := Value;
+end;
+function TFuncionarioModel.ValidateNome(const Value: string): Boolean;
+begin
+  Result := Length(Value) >= 3;
+end;
+function TFuncionarioModel.ValidateCpf(const Value: string): Boolean;
+begin
+  Result := TRegEx.IsMatch(Value, '^\d{11}$');
+end;
+function TFuncionarioModel.IsValid: Boolean;
+begin
+  Result := ValidateNome(FNome) and ValidateCpf(FCpf);
+end;
+end.

@@ -1,0 +1,78 @@
+unit uTicketDAO;
+
+interface
+
+uses
+  System.Generics.Collections, TicketModel, REST.Json, System.JSON,
+  CreateTicket, UpdateTicket, TicketsResumo;
+
+type
+  TTicketDAO = class
+    private
+
+    public
+      function AdicionarTicket(createTicket: TCreateTicket): Boolean;
+      function EditarTicket(idTicket: Integer; updateTicket: TUpdateTicket): Boolean;
+      function RecuperarTickets(): TObjectList<TTicketModel>;
+      function RecuperarTicket(idTicket: Integer): TTicketModel;
+      function RecuperarTicketsDetalhado(dataInicial, dataFinal: TDateTime; situacao: char = ' '; idFuncionario: Integer = 0): TTicketsResumo;
+  end;
+
+implementation
+
+uses
+  uDataModulo, System.Classes, System.SysUtils;
+
+{ TTicketDAO }
+
+function TTicketDAO.AdicionarTicket(createTicket: TCreateTicket): Boolean;
+var
+  JSONObject: TJSONObject;
+begin
+  JSONObject := createTicket.ToJson;
+  Result := DataModulo.RestConfig.Post('Ticket', JSONObject).StatusCode = 200;
+end;
+
+function TTicketDAO.EditarTicket(idTicket: Integer;
+  updateTicket: TUpdateTicket): Boolean;
+var
+  JSONObject: TJSONObject;
+begin
+  JSONObject := TJSON.ObjectToJsonObject(updateTicket);
+  Result := DataModulo.RestConfig.Put('Ticket/' + idTicket.ToString, JSONObject).StatusCode = 204;
+end;
+
+function TTicketDAO.RecuperarTicket(idTicket: Integer): TTicketModel;
+var
+  JSONObject: TJSONObject;
+begin
+  JSONObject := DataModulo.RestConfig.Get('Ticket', idTicket.ToString);
+  Result := TJson.JsonToObject<TTicketModel>(JSONObject);
+end;
+
+function TTicketDAO.RecuperarTickets: TObjectList<TTicketModel>;
+var
+  JsonArray: TJSONArray;
+begin
+  Result := TObjectList<TTicketModel>.create;
+  JsonArray := DataModulo.RestConfig.Get('Ticket') as TJSONArray;
+  if (JSONArray <> nil) and (JSONArray.Count > 0) then
+  begin
+    for var JSONValue: TJSONValue in JSONArray do
+    begin
+      var JSONItem := TJSONObject(JSONValue);
+      Result.Add(TJSON.JsonToObject<TTicketModel>(JSONItem));
+    end;
+  end;
+end;
+
+function TTicketDAO.RecuperarTicketsDetalhado(dataInicial, dataFinal: TDateTime;
+  situacao: char; idFuncionario: Integer): TTicketsResumo;
+var
+  JSONObject: TJSONObject;
+begin
+  JSONObject := DataModulo.RestConfig.Get('Ticket/RelatorioDetalhado') as TJSONObject;
+  Result     := TJSON.JsonToObject<TTicketsResumo>(JSONObject);
+end;
+
+end.

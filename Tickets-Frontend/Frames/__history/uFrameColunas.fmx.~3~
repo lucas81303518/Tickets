@@ -1,0 +1,12 @@
+object FrameColunas: TFrameColunas
+  Size.Width = 320.000000000000000000
+  Size.Height = 44.000000000000000000
+  Size.PlatformDefault = False
+  object rectGeral: TRectangle
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Thickness = 0.000000000000000000
+  end
+end

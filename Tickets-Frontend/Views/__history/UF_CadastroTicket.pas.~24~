@@ -1,0 +1,295 @@
+unit UF_CadastroTicket;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  UF_CadastroBase, FMX.Objects, FMX.Controls.Presentation, uTicketController,
+  uFuncionarioController, FMX.ListBox, FMX.DateTimeCtrls, FMX.Layouts, FMX.Edit,
+  FMX.EditBox, FMX.NumberBox, FuncionarioModel, CreateTicket;
+
+type
+  TFrmCadastroTicket = class(TFrmCadastroBase)
+    LayoutCpfAndData: TLayout;
+    LayoutFuncionario: TLayout;
+    Label2: TLabel;
+    cbFuncionario: TComboBox;
+    Layout1: TLayout;
+    Label4: TLabel;
+    gbSituacao: TGroupBox;
+    rbInativo: TRadioButton;
+    rbAtivo: TRadioButton;
+    Layout2: TLayout;
+    LayoutQuantidade: TLayout;
+    Label1: TLabel;
+    LayoutDataAlteracao: TLayout;
+    Label3: TLabel;
+    DateEditEntrega: TDateEdit;
+    timeEditHoraEntrega: TTimeEdit;
+    NumberQuantidade: TNumberBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure rectSalvarClick(Sender: TObject);
+  private
+    { Private declarations }
+    TicketController: TTicketController;
+    FuncionarioController: TFuncionarioController;
+    FuncionarioEdicaoTicket: TFuncionarioModel;
+
+    function ValidarCampos: Boolean;
+    procedure OnExecutarAposExecucao(Sender: TObject);
+    procedure AjustarComponentesVisuais;
+    procedure ConsultarTodosDadosTicket;
+    procedure ConsultarFuncionarios;
+    procedure OnExecutarAposConsultarFuncionarios(Sender: TObject);
+    procedure OnExecutarAposConsultarDadosTicket(Sender: TObject);
+    procedure PopularCampos;
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent; FId: Integer = 0; FFuncionarioTicket: TFuncionarioModel = nil);
+  end;
+
+var
+  FrmCadastroTicket: TFrmCadastroTicket;
+
+const INDEX_COMBOBOX_TODOS_FUNCIONARIOS = 0;
+
+implementation
+
+uses
+  Loading, System.Generics.Collections, Funcoes;
+
+{$R *.fmx}
+
+{ TFrmCadastroTicket }
+
+function ObterFuncionarioSelecionado(ComboBox: TComboBox): TFuncionarioModel;
+begin
+  if ComboBox.ItemIndex <> -1 then
+  begin
+    if ComboBox.Items.Objects[ComboBox.ItemIndex] is TFuncionarioModel then
+    begin
+      Result := TFuncionarioModel(ComboBox.Items.Objects[ComboBox.ItemIndex]);
+      Exit;
+    end;
+  end;
+
+  Result := nil;
+end;
+
+
+function SelecionarItemPorId(ComboBox: TComboBox; Id: Integer): Boolean;
+var
+  i: Integer;
+  Funcionario: TFuncionarioModel;
+begin
+  Result := False;
+
+  for i := 0 to ComboBox.Items.Count - 1 do
+  begin
+    Funcionario := TFuncionarioModel(ComboBox.Items.Objects[i]);
+
+    if Funcionario.Id = Id then
+    begin
+      ComboBox.ItemIndex := i;
+      Result := True;
+      Break;
+    end;
+  end;
+end;
+
+function ObterIdsFuncionarios(ComboBox: TComboBox): TList<Integer>;
+var
+  i: Integer;
+  Funcionario: TFuncionarioModel;
+  ListaIds: TList<Integer>;
+begin
+  ListaIds := TList<Integer>.Create;
+
+  try
+    for i := 0 to ComboBox.Items.Count - 1 do
+    begin
+      if ComboBox.Items.Objects[i] is TFuncionarioModel then
+      begin
+        Funcionario := TFuncionarioModel(ComboBox.Items.Objects[i]);
+        ListaIds.Add(Funcionario.Id);
+      end;
+    end;
+
+    Result := ListaIds;
+  except
+    ListaIds.Free;
+    raise;
+  end;
+end;
+
+procedure TFrmCadastroTicket.AjustarComponentesVisuais;
+begin
+  gbSituacao.Enabled := FId > 0;
+end;
+
+procedure TFrmCadastroTicket.ConsultarFuncionarios;
+begin
+  TLoading.Show('Consultando funcionários...', FrmCadastroTicket);
+  FuncionarioController.RecuperarFuncionarios(OnExecutarAposConsultarFuncionarios, True);
+end;
+
+procedure TFrmCadastroTicket.ConsultarTodosDadosTicket;
+begin
+  TLoading.Show('Consultando todos dados do Ticket...', FrmCadastroTicket);
+  TicketController.RecuperarTicket(FId, OnExecutarAposConsultarDadosTicket);
+end;
+
+constructor TFrmCadastroTicket.Create(AOwner: TComponent; FId: Integer = 0; FFuncionarioTicket: TFuncionarioModel = nil);
+begin
+  inherited Create(AOwner, FId);
+  FuncionarioEdicaoTicket     := FFuncionarioTicket;
+  FuncionarioController := TFuncionarioController.Create;
+  TicketController      := TTicketController.Create;
+  ConsultarFuncionarios;
+end;
+
+procedure TFrmCadastroTicket.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FuncionarioController.Free;
+  TicketController.Free;
+  Action := TCloseAction.caFree;
+  FrmCadastroTicket := nil;
+end;
+
+procedure TFrmCadastroTicket.FormShow(Sender: TObject);
+begin
+  inherited;
+  AjustarComponentesVisuais;
+end;
+
+procedure TFrmCadastroTicket.OnExecutarAposConsultarDadosTicket(
+  Sender: TObject);
+begin
+  TLoading.Hide;
+  if Sender is TThread then
+  begin
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+      ShowMessage(Exception(TThread(sender).FatalException).Message);
+      Exit;
+    end;
+  end;
+
+  PopularCampos;
+end;
+
+procedure TFrmCadastroTicket.OnExecutarAposConsultarFuncionarios(
+  Sender: TObject);
+begin
+  TLoading.Hide;
+  if Sender is TThread then
+  begin
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+      ShowMessage(Exception(TThread(sender).FatalException).Message);
+      Exit;
+    end;
+  end;
+
+  cbFuncionario.BeginUpdate;
+  try
+    cbFuncionario.Items.Clear;
+    if FId = 0 then
+      cbFuncionario.Items.Add('Todos funcionários ativos');
+    for var funcionario: TFuncionarioModel in FuncionarioController.listaFuncionarios do
+      cbFuncionario.Items.AddObject(funcionario.Nome, funcionario);
+    if (FuncionarioEdicaoTicket <> nil) and (FuncionarioEdicaoTicket.Situacao = 'I') then
+      cbFuncionario.Items.AddObject(FuncionarioEdicaoTicket.Nome, FuncionarioEdicaoTicket);
+  finally
+    cbFuncionario.EndUpdate;
+  end;
+
+  if FId > 0 then
+    ConsultarTodosDadosTicket;
+end;
+
+procedure TFrmCadastroTicket.OnExecutarAposExecucao(Sender: TObject);
+begin
+  TLoading.Hide;
+  if Sender is TThread then
+  begin
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+      ShowMessage(Exception(TThread(sender).FatalException).Message);
+      Exit;
+    end;
+  end;
+
+  ShowMessage('Ticket inserido/atualizado com sucesso!');
+  Close;
+end;
+
+procedure TFrmCadastroTicket.PopularCampos;
+begin
+  SelecionarItemPorId(cbFuncionario, FuncionarioEdicaoTicket.Id);
+  with TicketController.ticket do
+  begin
+    NumberQuantidade.Value   := Quantidade;
+    DateEditEntrega.Date     := DataEntrega;
+    timeEditHoraEntrega.Time := DataEntrega;
+    if Situacao = 'A' then
+      rbAtivo.IsChecked := True
+    else
+      rbInativo.IsChecked := True;
+  end;
+end;
+
+procedure TFrmCadastroTicket.rectSalvarClick(Sender: TObject);
+begin
+  inherited;
+  if not ValidarCampos() then
+    Exit;
+
+  if FId = 0 then
+  begin
+    var createTicket: TCreateTicket;
+    createTicket := TCreateTicket.Create;
+
+    with createTicket do
+    begin
+      Quantidade := StrToInt(NumberQuantidade.text);
+      idFuncionarios := TList<integer>.create;
+      if cbFuncionario.ItemIndex = INDEX_COMBOBOX_TODOS_FUNCIONARIOS then
+        idFuncionarios := ObterIdsFuncionarios(cbFuncionario)
+      else
+        idFuncionarios.add(ObterFuncionarioSelecionado(cbFuncionario).Id);
+    end;
+    TLoading.Show('Inserindo Ticket...', FrmCadastroTicket);
+    TicketController.AdicionarTicket(createTicket, OnExecutarAposExecucao);
+  end
+  else
+  begin
+
+  end;
+end;
+
+function TFrmCadastroTicket.ValidarCampos: Boolean;
+begin
+  Result := False;
+
+  if cbFuncionario.ItemIndex < 0 then
+  begin
+    ShowMessage('Selecione um funcionário.');
+    cbFuncionario.SetFocus;
+    Exit;
+  end;
+
+  if StrToIntDef(NumberQuantidade.text, 0) = 0 then
+  begin
+    ShowMessage('Quantidade deve ser maior que 0.');
+    NumberQuantidade.SetFocus;
+    Exit;
+  end;
+
+  Result := True;
+end;
+
+end.
