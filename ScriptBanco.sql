@@ -1,3 +1,5 @@
+CREATE DATABASE "TicketsDB";
+
 CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
     "MigrationId" character varying(150) NOT NULL,
     "ProductVersion" character varying(32) NOT NULL,
