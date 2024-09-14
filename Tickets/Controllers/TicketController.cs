@@ -38,7 +38,7 @@ namespace Tickets.Controllers
             if (retorno.ErrorCode == ErrorCode.TicketNaoEncontrado)
                 return NotFound(retorno.ErrorMessage);
             return BadRequest(retorno.ErrorMessage);
-        }
+        }       
 
         [HttpGet]
         public async Task<IActionResult> RecuperarTickets()

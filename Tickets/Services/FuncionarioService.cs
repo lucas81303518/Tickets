@@ -25,8 +25,8 @@ namespace Tickets.Services
         public async Task<ResponseClient<object>> AdicionarFuncionario(CreateFuncionarioDto createFuncionarioDto)
         {
             var funcionarioModel = _mapper.Map<Funcionario>(createFuncionarioDto);
-            funcionarioModel.Situacao = 'A';
-            funcionarioModel.DataAlteracao = DateTime.UtcNow;
+            funcionarioModel.DataAlteracao = DateTime.Now;
+            funcionarioModel.Situacao = 'A';            
             try
             {
                 await _context.Funcionarios.AddAsync(funcionarioModel);
@@ -52,8 +52,8 @@ namespace Tickets.Services
 
             try
             {
-                _mapper.Map(updateFuncionarioDto, funcionario);
-                funcionario.DataAlteracao = DateTime.UtcNow;
+                funcionario.DataAlteracao = DateTime.Now;                
+                _mapper.Map(updateFuncionarioDto, funcionario);                
                 await _context.SaveChangesAsync();
                 return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
             }
@@ -68,11 +68,32 @@ namespace Tickets.Services
             }
         }
 
-        public async Task<ResponseClient<IEnumerable<Funcionario>>> RecuperarFuncionarios()
+        public async Task<ResponseClient<object>> ExisteAlgumFuncionarioCadastrado()
         {
             try
             {
-                var funcionarios = await _context.Funcionarios.ToListAsync();
+                var retorno = await _context.Funcionarios.FirstOrDefaultAsync();
+                if (retorno == null)
+                    return new ResponseClient<object>(false, ErrorCode.NaoExisteNenhumFuncionarioCadastrado);
+                return new ResponseClient<object>(true, retorno);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseClient<object>(false, ErrorCode.ErroAoConsultar, ex.Message);
+            }
+        }
+
+        public async Task<ResponseClient<IEnumerable<Funcionario>>> RecuperarFuncionarios(bool SomenteAtivos = false)
+        {
+            try
+            {
+                var query = _context.Funcionarios.AsQueryable();
+
+                if (SomenteAtivos)                
+                    query = query.Where(f => f.Situacao == 'A');                
+
+                var funcionarios = await query.ToListAsync();
+
                 return new ResponseClient<IEnumerable<Funcionario>>(true, funcionarios);
             }
             catch (Exception ex)

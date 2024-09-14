@@ -13,7 +13,8 @@
             CpfDigitosIguais,
             CpfInvalido,
             TicketNaoEncontrado,
-            ErroAoConsultar
+            ErroAoConsultar,
+            NaoExisteNenhumFuncionarioCadastrado
         }
 
         private static readonly Dictionary<ErrorCode, string> _messages = new Dictionary<ErrorCode, string>
@@ -27,7 +28,8 @@
             { ErrorCode.CpfDigitosIguais, "O CPF não pode conter todos os dígitos iguais." },
             { ErrorCode.CpfInvalido, "O CPF informado é inválido." },
             { ErrorCode.TicketNaoEncontrado, "Ticket não encontrado."},
-            { ErrorCode.ErroAoConsultar, "Erro ao consultar dados." }
+            { ErrorCode.ErroAoConsultar, "Erro ao consultar dados." },
+            { ErrorCode.NaoExisteNenhumFuncionarioCadastrado, "Para cadastrar um novo Ticket é necessário ter ao menos 1 funcionário cadastrado!" }
         };
 
         public static string GetErrorMessage(ErrorCode errorCode)

@@ -19,15 +19,11 @@ namespace Tickets.Data
 
             modelBuilder.Entity<Funcionario>()
            .Property(f => f.DataAlteracao)
-           .HasColumnType("timestamp without time zone") 
-           .ValueGeneratedOnAddOrUpdate() 
-           .HasDefaultValueSql("CURRENT_TIMESTAMP");
+           .HasColumnType("timestamp without time zone");
 
             modelBuilder.Entity<TicketEntregue>()
            .Property(f => f.DataEntrega)
-           .HasColumnType("timestamp without time zone")
-           .ValueGeneratedOnAddOrUpdate()
-           .HasDefaultValueSql("CURRENT_TIMESTAMP");
+           .HasColumnType("timestamp without time zone");            
 
             modelBuilder.Entity<Funcionario>()
                 .HasIndex(f => f.Cpf)

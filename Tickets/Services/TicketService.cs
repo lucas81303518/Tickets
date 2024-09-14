@@ -27,10 +27,16 @@ namespace Tickets.Services
         public async Task<ResponseClient<object>> AdicionarTicket(CreateTicket createTicket)
         {
             try
-            {                
-                var ticketModel = _mapper.Map<TicketEntregue>(createTicket);
-                ticketModel.Situacao = 'A';
-                await _context.AddAsync(ticketModel);
+            {
+                foreach (int funcionarioId in createTicket.idFuncionarios)
+                {
+                    var ticketModel = _mapper.Map<TicketEntregue>(createTicket);
+                    ticketModel.Situacao = 'A';
+                    ticketModel.DataEntrega = DateTime.Now;
+                    ticketModel.FuncionarioId = funcionarioId;
+                    await _context.AddAsync(ticketModel);
+                }
+                
                 await _context.SaveChangesAsync();
                 return new ResponseClient<object>(true, ErrorCode.OperacaoBemSucedida);
             }
@@ -98,7 +104,7 @@ namespace Tickets.Services
             (DateTime dataInicial, DateTime dataFinal, char situacao, int idFuncionario)
         {
             var query = _context.TicketsEntregue
-                        .Where(t => t.DataEntrega >= dataInicial && t.DataEntrega <= dataFinal);
+                        .Where(t => t.DataEntrega.Date >= dataInicial && t.DataEntrega.Date <= dataFinal);
 
             if ((situacao.ToString() != "\0") && (situacao != 'T'))
                 query = query.Where(t => t.Situacao == situacao);          

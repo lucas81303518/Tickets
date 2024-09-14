@@ -43,12 +43,25 @@ namespace Tickets.Controllers
             return BadRequest(retorno.ErrorMessage);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Funcionario>>> RecuperarFuncionarios()            
+        [HttpGet("ExisteAlgumFuncionarioCadastrado")]
+        public async Task<IActionResult> ExisteAlgumFuncionarioCadastrado()
         {
-            var funcionarios = await _funcionarioService.RecuperarFuncionarios();            
-            return Ok(funcionarios);
+            var retorno = await _funcionarioService.ExisteAlgumFuncionarioCadastrado();
+            if (retorno.Success)
+                return Ok(retorno.Data);
+            if (retorno.ErrorCode == ErrorCode.ErroAoConsultar)
+                return Problem(retorno.ErrorMessage);
+            return NotFound(retorno.ErrorMessage);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Funcionario>>> RecuperarFuncionarios([FromQuery] bool SomenteAtivos = false)            
+        {
+            var retorno = await _funcionarioService.RecuperarFuncionarios(SomenteAtivos);    
+            if (retorno.Success)
+                return Ok(retorno.Data);
+            return Problem(retorno.ErrorMessage);
+        }       
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Funcionario>> RecuperarFuncionario(int id)
