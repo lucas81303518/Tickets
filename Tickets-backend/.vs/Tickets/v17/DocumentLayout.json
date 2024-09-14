@@ -1,0 +1,245 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Tickets-backend\\Tickets\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\services\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:services\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\data\\dto\\createticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:data\\dto\\createticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\services\\funcionarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:services\\funcionarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\controllers\\funcionariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:controllers\\funcionariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\models\\errormessages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:models\\errormessages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\data\\dto\\responseclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:data\\dto\\responseclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\models\\ticketentregue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:models\\ticketentregue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\data\\dto\\readticketsdetalhado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:data\\dto\\readticketsdetalhado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\data\\dto\\readticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:data\\dto\\readticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\data\\dto\\updateticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:data\\dto\\updateticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\data\\ticketscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:data\\ticketscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\models\\validations\\cpfvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:models\\validations\\cpfvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\profiles\\ticketprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:profiles\\ticketprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|f:\\tickets-backend\\tickets\\models\\funcionario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31858378-D94F-402B-9604-CEB8B417CD08}|Tickets.csproj|solutionrelative:models\\funcionario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TicketService.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Services\\TicketService.cs",
+              "RelativeDocumentMoniker": "Services\\TicketService.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Services\\TicketService.cs",
+              "RelativeToolTip": "Services\\TicketService.cs",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAQwGwAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:20:16.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ErrorMessages.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Models\\ErrorMessages.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorMessages.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Models\\ErrorMessages.cs",
+              "RelativeToolTip": "Models\\ErrorMessages.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAQwB8AAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T03:39:30.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ResponseClient.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\ResponseClient.cs",
+              "RelativeDocumentMoniker": "Data\\DTO\\ResponseClient.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\ResponseClient.cs",
+              "RelativeToolTip": "Data\\DTO\\ResponseClient.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA4wBQAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:26:23.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ReadTicket.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\ReadTicket.cs",
+              "RelativeDocumentMoniker": "Data\\DTO\\ReadTicket.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\ReadTicket.cs",
+              "RelativeToolTip": "Data\\DTO\\ReadTicket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:54:01.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateTicket.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\CreateTicket.cs",
+              "RelativeDocumentMoniker": "Data\\DTO\\CreateTicket.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\CreateTicket.cs",
+              "RelativeToolTip": "Data\\DTO\\CreateTicket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:36:26.089Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FuncionarioService.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Services\\FuncionarioService.cs",
+              "RelativeDocumentMoniker": "Services\\FuncionarioService.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Services\\FuncionarioService.cs",
+              "RelativeToolTip": "Services\\FuncionarioService.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAiwFkAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:20:17.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FuncionarioController.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Controllers\\FuncionarioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FuncionarioController.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Controllers\\FuncionarioController.cs",
+              "RelativeToolTip": "Controllers\\FuncionarioController.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAApwDsAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:24:05.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TicketsContext.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Data\\TicketsContext.cs",
+              "RelativeDocumentMoniker": "Data\\TicketsContext.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Data\\TicketsContext.cs",
+              "RelativeToolTip": "Data\\TicketsContext.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABQAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T14:38:23.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UpdateTicket.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\UpdateTicket.cs",
+              "RelativeDocumentMoniker": "Data\\DTO\\UpdateTicket.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\UpdateTicket.cs",
+              "RelativeToolTip": "Data\\DTO\\UpdateTicket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:54:35.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ReadTicketsDetalhado.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\ReadTicketsDetalhado.cs",
+              "RelativeDocumentMoniker": "Data\\DTO\\ReadTicketsDetalhado.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Data\\DTO\\ReadTicketsDetalhado.cs",
+              "RelativeToolTip": "Data\\DTO\\ReadTicketsDetalhado.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAqwAgAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T18:57:11.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TicketEntregue.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Models\\TicketEntregue.cs",
+              "RelativeDocumentMoniker": "Models\\TicketEntregue.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Models\\TicketEntregue.cs",
+              "RelativeToolTip": "Models\\TicketEntregue.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAQwAkAAABVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:47:55.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CpfValidator.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Models\\Validations\\CpfValidator.cs",
+              "RelativeDocumentMoniker": "Models\\Validations\\CpfValidator.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Models\\Validations\\CpfValidator.cs",
+              "RelativeToolTip": "Models\\Validations\\CpfValidator.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAgwEIAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T04:15:59.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TicketProfile.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Profiles\\TicketProfile.cs",
+              "RelativeDocumentMoniker": "Profiles\\TicketProfile.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Profiles\\TicketProfile.cs",
+              "RelativeToolTip": "Profiles\\TicketProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:43:11.893Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Funcionario.cs",
+              "DocumentMoniker": "F:\\Tickets-backend\\Tickets\\Models\\Funcionario.cs",
+              "RelativeDocumentMoniker": "Models\\Funcionario.cs",
+              "ToolTip": "F:\\Tickets-backend\\Tickets\\Models\\Funcionario.cs",
+              "RelativeToolTip": "Models\\Funcionario.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:29:11.756Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
