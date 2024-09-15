@@ -4,7 +4,7 @@
 *Utilizo como arquitetura de software o MVC, pela facilidade de manutenção e escalabilidade.*
 *Projeto posui documentação com Swagger, ao rodar o projeto .NET ele abre um navegador contendo todos Endpoints*
 ## Obs: Na raiz do projeto possui um Script de criação da base de dados como solicitado, porém não é necessário utiliza-la, pois configurei a API para rodar as migrations 
-## automaticamente, então caso não tenha o banco de dados ele vai criar sozinho.
+## automaticamente, então caso não tenha o banco de dados ele vai criar sozinho, banco de dados utilizado Postgres.
 
 ## Diretórios do Projeto
 
