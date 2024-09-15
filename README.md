@@ -1,4 +1,4 @@
-# Tickets - Principal
+# Tickets
 # API Rest - BackEnd
 
 *Utilizo como arquitetura de software o MVC, pela facilidade de manutenção e escalabilidade.*
